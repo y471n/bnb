@@ -4,11 +4,13 @@ export interface IStockHistory {
   readableTime: string;
 }
 
+export interface IStockObj {
+  val: number;
+  history: Array<IStockHistory>;
+}
+
 export interface IStock {
-  [name: string]: {
-    val: number;
-    history: Array<IStockHistory>;
-  };
+  [name: string]: IStockObj;
 }
 
 export interface ISelectedStock {

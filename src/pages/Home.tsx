@@ -49,6 +49,11 @@ const Home = () => {
     return existingStockMap;
   };
 
+  /**
+   *
+   * @param feed any
+   * Any since this is the data which is fetched from WebSocker
+   */
   const receiveStockData = (feed: any) => {
     const stockInputData = JSON.parse(feed.data);
     setStockMap(getStockMap(stockInputData));

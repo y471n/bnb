@@ -1,3 +1,8 @@
+/**
+ *
+ * @param dateTime number
+ * @returns string
+ */
 export const getReadableTime = (dateTime: number) => {
   const dateTimeObj = new Date(dateTime);
   const hour = dateTimeObj.getHours();

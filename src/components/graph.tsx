@@ -15,8 +15,6 @@ interface IGraphProps {
 }
 
 const Graph = ({ selectedStock }: IGraphProps) => {
-  console.log(selectedStock);
-
   return (
     <div>
       {selectedStock && selectedStock.history && (

@@ -1,10 +1,13 @@
 import * as React from "react";
-import { IStock } from "../interfaces/stock";
-import StockVal from "./stockVal";
+import { IStock, IStockHistory } from "../interfaces/stock";
+import StockRow from "./stockRow";
 
-const StockTable = (props: any) => {
-  const stockMap: IStock = props.stockMap;
+interface IStockTableProps {
+  stockMap: IStock;
+  handleClick(stockName: string, stockHistory: Array<IStockHistory>): void;
+}
 
+const StockTable = ({ stockMap, handleClick }: IStockTableProps) => {
   return (
     <table>
       <thead>
@@ -15,18 +18,11 @@ const StockTable = (props: any) => {
       </thead>
       <tbody>
         {Object.entries(stockMap).map(([stockName, stockObj]) => (
-          <tr
-            key={stockName}
-            onClick={() => props.handleClick(stockName, stockObj.history)}
-          >
-            <td>{stockName}</td>
-            <td>
-              <StockVal
-                currentValue={stockObj.val}
-                history={stockObj.history}
-              />
-            </td>
-          </tr>
+          <StockRow
+            name={stockName}
+            stockObj={stockObj}
+            handleClick={handleClick}
+          />
         ))}
       </tbody>
     </table>
