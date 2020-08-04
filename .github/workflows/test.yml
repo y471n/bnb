@@ -43,7 +43,7 @@ jobs:
     - name: Build page
       run: npm run build
     - name: Deploy to gh-pages
-      uses: y471n/bnb@v3
+      uses: y471n/bnb
       with:
         deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         publish_dir: ./build
