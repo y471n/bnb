@@ -1,28 +1,32 @@
 import React from "react";
-import { IStockObj, IStockHistory } from "../interfaces/stock";
+import { IStockObj } from "../interfaces/stock";
 import StockVal from "./stockVal";
+import { useStockContext } from "../stockContext";
+import UpdatedAt from "./updatedAt";
 
 interface IStockRowProps {
   name: string;
   stockObj: IStockObj;
-  handleClick(name: string, history: Array<IStockHistory>): void;
 }
 
-const StockRow = ({ name, stockObj, handleClick }: IStockRowProps) => {
-  const [selected, setSelected] = React.useState(false);
-
+const StockRow = ({ name, stockObj }: IStockRowProps) => {
+  const stockContext = useStockContext();
   return (
     <tr
       key={name}
-      className={selected ? "selected" : ""}
+      className={stockContext?.selectedStock === name ? "selected" : ""}
       onClick={() => {
-        setSelected(!selected);
-        handleClick(name, stockObj.history);
+        stockContext?.setSelectedStock(name);
       }}
     >
       <td>{name}</td>
       <td>
         <StockVal currentValue={stockObj.val} history={stockObj.history} />
+      </td>
+      <td>
+        <UpdatedAt
+          updatedAt={stockObj.history[stockObj.history.length - 1].time}
+        />
       </td>
     </tr>
   );

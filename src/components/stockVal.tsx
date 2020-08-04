@@ -8,7 +8,7 @@ const StockVal = (props: any) => {
     <>
       <span
         className={
-          history.length > 1 && history[history.length - 2].val > currentValue
+          history.length > 1 && history[history.length - 2].val < currentValue
             ? "text-success"
             : "text-danger"
         }

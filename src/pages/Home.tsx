@@ -1,28 +1,37 @@
 import * as React from "react";
-import { IStock, IStockHistory, ISelectedStock } from "../interfaces/stock";
+import { IStock, IStockHistory } from "../interfaces/stock";
 import StockTable from "../components/stockTable";
 import Graph from "../components/graph";
 import { getReadableTime } from "../utils";
+import { StockContext } from "../stockContext";
 
 const ENDPOINT = "ws://stocks.mnet.website/";
-const initialStockMap: IStock = {};
 
 const Home = () => {
-  const [stockMap, setStockMap] = React.useState(initialStockMap);
-  const [selectedStock, setSelectedStock] = React.useState<
-    ISelectedStock | undefined
-  >(undefined);
+  const [stockMap, setStockMap] = React.useState<IStock | undefined>(undefined);
+  const [selectedStock, setSelectedStock] = React.useState<string | undefined>(
+    undefined
+  );
 
+  const stockContext = React.useMemo(
+    () => ({
+      stocks: stockMap,
+      selectedStock: selectedStock,
+      setStocks: setStockMap,
+      setSelectedStock: setSelectedStock,
+    }),
+    [selectedStock, stockMap, setStockMap, setSelectedStock]
+  );
   /**
    *
    * @param stockInputData {Array<[string, number]}
    * @returns {IStock}
    */
   const getStockMap = (stockInput: Array<[string, number]>): IStock => {
-    let existingStockMap = { ...stockMap };
+    let existingStockMap = stockMap ? { ...stockMap } : {};
     for (let i = 0; i < stockInput.length; i += 1) {
       const stock = stockInput[0];
-      const currentStockName = stock[0];
+      const currentStockName: string = stock[0];
       const currentStockValue = Number(Number(stock[1]).toFixed(2));
       const currentTime = Date.now();
       const stockHistoryItem: IStockHistory = {
@@ -30,7 +39,7 @@ const Home = () => {
         val: currentStockValue,
         readableTime: getReadableTime(currentTime),
       };
-      if (existingStockMap[currentStockName]) {
+      if (existingStockMap && existingStockMap[currentStockName]) {
         const currentStockHistory = existingStockMap[currentStockName].history;
         if (
           currentStockHistory[currentStockHistory.length - 1].val !==
@@ -68,31 +77,29 @@ const Home = () => {
     return () => connection.close();
   });
 
-  const handleClick = (
-    stockName: string,
-    stockHistory: Array<IStockHistory>
-  ) => {
-    const selectStock: ISelectedStock = {
-      name: stockName,
-      history: stockHistory,
-    };
-    setSelectedStock(selectStock);
-  };
+  // const handleClick = (
+  //   stockName: string,
+  //   stockHistory: Array<IStockHistory>
+  // ) => {
+  //   const selectStock: ISelectedStock = {
+  //     name: stockName,
+  //     history: stockHistory,
+  //   };
+  //   setSelectedStock(stockName);
+  // };
 
   return (
     <div>
-      <div className="container">
-        <div className="row flex-spaces">
-          <div className="col-3">
-            {stockMap && (
-              <StockTable stockMap={stockMap} handleClick={handleClick} />
-            )}
-          </div>
-          <div className="col-5">
-            <Graph selectedStock={selectedStock} />
+      <StockContext.Provider value={stockContext}>
+        <div className="container">
+          <div className="row flex-spaces">
+            <div className="col-3">{stockMap && <StockTable />}</div>
+            <div className="col-5">
+              <Graph />
+            </div>
           </div>
         </div>
-      </div>
+      </StockContext.Provider>
     </div>
   );
 };

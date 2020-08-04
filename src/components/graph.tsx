@@ -8,21 +8,19 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { ISelectedStock } from "../interfaces/stock";
+import { useStockContext } from "../stockContext";
 
-interface IGraphProps {
-  selectedStock: ISelectedStock | undefined;
-}
-
-const Graph = ({ selectedStock }: IGraphProps) => {
+const Graph = () => {
+  const stockContext = useStockContext();
+  console.log(stockContext);
   return (
     <div>
-      {selectedStock && selectedStock.history && (
+      {stockContext && stockContext.stocks && stockContext.selectedStock && (
         <>
           <LineChart
             width={500}
             height={300}
-            data={selectedStock?.history}
+            data={stockContext.stocks[stockContext.selectedStock].history}
             margin={{
               top: 5,
               right: 30,

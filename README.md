@@ -30,6 +30,7 @@ To Test run `npm test`
 
 The demo website is deployed at <a href="https://https://bullsandbears.netlify.app/.netlify.app/" target="_blank">Netlify</a>
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/5dcd3296-6240-483c-983a-df6cd2eba7ca/deploy-status)](https://app.netlify.com/sites/bullsandbears/deploys)
+## Status
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5dcd3296-6240-483c-983a-df6cd2eba7ca/deploy-status)](https://app.netlify.com/sites/bullsandbears/deploys)
 ![Node.js CI](https://github.com/y471n/bnb/workflows/Node.js%20CI/badge.svg)
