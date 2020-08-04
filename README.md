@@ -34,4 +34,4 @@ The demo website is deployed at <a href="http://www.yatin.space/bnb/" target="_b
 
 ## Status
 
-![Node.js CI](https://github.com/y471n/bnb/workflows/Node.js%20CI/badge.svg)
+![CI/CD](https://github.com/y471n/bnb/workflows/CI/CD/badge.svg)
