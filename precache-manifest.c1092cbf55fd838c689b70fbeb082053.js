@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8a5405a9afe791bf00541d0b743a07d7",
+    "revision": "207dce3fcd05df1227ea9225243beb96",
     "url": "/bnb/index.html"
   },
   {
-    "revision": "7dd330a619f9ed377e99",
+    "revision": "70e4e8a31b15e20e40f1",
     "url": "/bnb/static/css/main.56a33dc8.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bnb/static/js/2.45e49d09.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "7dd330a619f9ed377e99",
-    "url": "/bnb/static/js/main.3160fc1e.chunk.js"
+    "revision": "70e4e8a31b15e20e40f1",
+    "url": "/bnb/static/js/main.a5606f5a.chunk.js"
   },
   {
     "revision": "7009d198e34bf1d9bfe7",
